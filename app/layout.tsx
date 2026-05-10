@@ -1,31 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 
 /*
- * Two voices: a refined sans (Geist) for chrome and body, a quiet display
- * serif (Instrument Serif) for headlines and accents. Mono for numbers
- * inside cards. Static export friendly — next/font self-hosts everything.
+ * Two voices: Inter for chrome, body, and headings (PH uses a humanist sans
+ * system-wide); Geist Mono for tabular numbers and meta labels. Static
+ * export friendly — next/font self-hosts everything.
  */
-const geistSans = Geist({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-inter",
   display: "swap",
 });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -50,17 +42,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+      className={`${inter.variable} ${geistMono.variable}`}
     >
-      <body className="paper-grain relative flex min-h-[100dvh] flex-col">
+      <body className="relative flex min-h-[100dvh] flex-col bg-cream text-ink">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-3 focus:py-1.5 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-3 focus:py-1.5 focus:text-on-orange"
         >
           Skip to content
         </a>
         <Header />
-        <main id="main" className="relative z-[1] flex-1">
+        <main id="main" className="flex-1">
           {children}
         </main>
         <Footer />

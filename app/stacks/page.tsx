@@ -10,13 +10,14 @@ export const metadata: Metadata = {
 
 export default function StacksPage() {
   return (
-    <div className="mx-auto w-full max-w-[var(--container-wide)] px-5 pb-24 pt-16 md:px-8 md:pt-24">
-      <header className="mb-14 max-w-[60ch]">
-        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
+    <div className="mx-auto w-full max-w-[var(--container-wide)] px-5 pb-24 pt-14 md:px-8 md:pt-20">
+      <header className="mb-12 max-w-[60ch]">
+        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
           Catalog · Stacks
         </p>
-        <h1 className="mt-4 font-display text-[length:var(--text-h1)] leading-[1.05]">
-          End-to-end at <span className="italic text-accent-ink">$0/mo</span>.
+        <h1 className="mt-4 text-[length:var(--text-h1)] font-bold leading-[1.1] tracking-[-0.02em] text-ink">
+          End-to-end at{" "}
+          <span className="whitespace-nowrap text-orange-deep">$0/mo</span>.
         </h1>
         <p className="mt-4 text-base leading-relaxed text-ink-2">
           Pre-wired combinations that work together on free tiers. Each stack

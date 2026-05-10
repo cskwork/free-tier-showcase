@@ -1,78 +1,101 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — editorial directory tone.
- * Light-mode committed. Tints are warm to avoid the cold "AI grey" default;
- * the single accent is a desaturated moss/emerald so it disappears into
- * neutrals until it's needed (links, recommended badge, focus ring).
+ * Design tokens — Product Hunt faithful.
+ * Cream surface, white cards, single saturated orange accent.
+ * Light-mode only; dark theme is out of scope for v1 (see design-guidelines.md).
  */
 :root {
   /* Surfaces */
-  --paper: #fbfaf7;
-  --paper-2: #f4f2ec;
-  --ink: #1a1a18;
-  --ink-2: #2a2926;
-  --muted: #6b6962;
-  --muted-2: #8a8780;
-  --rule: #e5e2da;
-  --rule-strong: #c9c5b9;
+  --cream: #f8f8f4;
+  --surface: #ffffff;
+  --surface-2: #f4f4ee;
 
-  /* Accent (desaturated moss). Saturation < 80% per anti-AI palette rules. */
-  --accent: #3f6b4f;
-  --accent-ink: #1f3a2a;
-  --accent-soft: #e6ece5;
+  /* Ink (slate-blue, NOT pure black — PH's text color) */
+  --ink: #21293c;
+  --ink-2: #4a5470;
+  --ink-3: #6b7280;
 
-  /* Backgrounds — same family, just shifted. No random dark sections. */
-  --background: var(--paper);
+  /* Rules */
+  --rule: #e5e5e0;
+  --rule-strong: #cfcfc7;
+
+  /* Accent — Product Hunt orange */
+  --orange: #ff6154;          /* Primary CTA fill (PH app's actual orange) */
+  --orange-deep: #da552f;     /* Hover/active, brand chrome (PH logo orange) */
+  --orange-soft: #ffe9e3;     /* Recommended row tint, badge bg */
+  --orange-ink: #7a2510;      /* Text on orange-soft */
+  --on-orange: #ffffff;
+
+  /* Semantic */
+  --success: #16a34a;
+  --warn: #b45309;
+
+  /* Shadows — slate-tinted, not pure black */
+  --shadow-1: 0 1px 2px rgba(33, 41, 60, 0.04);
+  --shadow-2: 0 4px 12px -4px rgba(33, 41, 60, 0.08);
+  --shadow-3: 0 12px 24px -8px rgba(33, 41, 60, 0.12);
+  --shadow-4: 0 24px 48px -16px rgba(33, 41, 60, 0.18);
+
+  /* Backgrounds — page sits on cream */
+  --background: var(--cream);
   --foreground: var(--ink);
-
-  /* Tinted shadows — carry the paper hue, not pure black. */
-  --shadow-sm: 0 1px 2px rgba(31, 28, 18, 0.04);
-  --shadow-md: 0 8px 24px -12px rgba(31, 28, 18, 0.08);
-  --shadow-lg: 0 24px 48px -28px rgba(31, 28, 18, 0.18);
 
   /* Motion */
   --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 160ms;
-  --duration: 240ms;
-  --duration-slow: 420ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration: 200ms;
+  --duration-slow: 380ms;
 }
 
 @theme inline {
+  /* Color utilities — `bg-cream`, `text-ink`, `border-rule`, etc. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-paper: var(--paper);
-  --color-paper-2: var(--paper-2);
+  --color-cream: var(--cream);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
-  --color-muted: var(--muted);
-  --color-muted-2: var(--muted-2);
+  --color-ink-3: var(--ink-3);
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-soft: var(--accent-soft);
+  --color-orange: var(--orange);
+  --color-orange-deep: var(--orange-deep);
+  --color-orange-soft: var(--orange-soft);
+  --color-orange-ink: var(--orange-ink);
+  --color-on-orange: var(--on-orange);
+  --color-success: var(--success);
+  --color-warn: var(--warn);
 
   /* Typography stack — set on `html` via next/font CSS variables. */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
 
-  /* Editorial type scale */
-  --text-display: clamp(2.75rem, 5.5vw + 1rem, 5.25rem);
-  --text-h1: clamp(2rem, 3.2vw + 1rem, 3rem);
-  --text-h2: clamp(1.5rem, 1.4vw + 1rem, 2rem);
+  /* Type scale (clamp for fluid, rem for steady) */
+  --text-display: clamp(2.25rem, 4vw + 1rem, 3.75rem);
+  --text-h1: clamp(1.875rem, 2.4vw + 1rem, 2.5rem);
+  --text-h2: clamp(1.5rem, 1.2vw + 1rem, 1.875rem);
 
   /* Container widths */
   --container-wide: 76rem;
+  --container-narrow: 64rem;
   --container-prose: 44rem;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
 }
 
 html {
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
   scroll-behavior: smooth;
-  /* Tabular numerals everywhere — this is a directory of limits/quotas. */
+  /* Tabular numerals everywhere — this is a directory of numeric quotas. */
   font-variant-numeric: tabular-nums;
   text-rendering: optimizeLegibility;
 }
@@ -81,32 +104,15 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Display utility: serif, tight tracking, balanced wrap. */
-.font-display {
-  font-family: var(--font-display);
-  font-feature-settings: "ss01", "kern";
-  letter-spacing: -0.02em;
-}
-
-/* Honest paper grain — fixed, pointer-events: none, no scroll repaint cost. */
-.paper-grain::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0.045 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  /* PH-style body text weight + tracking */
+  letter-spacing: -0.005em;
 }
 
 /* Scroll-reveal — tasteful, CSS-only.
    Children with [data-reveal] start translated/dimmed and lift in via JS island. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
   transition:
     opacity var(--duration-slow) var(--ease-out-quart),
     transform var(--duration-slow) var(--ease-out-quart);
@@ -129,27 +135,36 @@ body {
   }
 }
 
-/* Selection — accent moss, not the default browser blue. */
+/* Selection — orange-soft tint, matches PH's accent. */
 ::selection {
-  background: var(--accent-soft);
-  color: var(--accent-ink);
+  background: var(--orange-soft);
+  color: var(--orange-ink);
 }
 
-/* Focus ring — keyboard-only, accent-tinted. */
+/* Focus ring — keyboard-only, accent-tinted. PH uses orange focus on its app. */
 :where(a, button, [role="button"], input, select, textarea):focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--orange);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Link underline rhythm */
+/* Inline link — underline at rest, color shift on hover. */
 .link-underline {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
-  text-decoration-color: color-mix(in oklab, var(--ink) 30%, transparent);
+  text-decoration-color: color-mix(in oklab, var(--ink) 25%, transparent);
   transition: text-decoration-color var(--duration-fast) var(--ease-out-quart);
 }
 .link-underline:hover {
   text-decoration-color: var(--ink);
+}
+
+/* Featured-row tint — used on hero ServiceCard when service.recommended. */
+.featured-tint {
+  background: linear-gradient(
+    180deg,
+    var(--orange-soft) 0%,
+    var(--surface) 64%
+  );
 }

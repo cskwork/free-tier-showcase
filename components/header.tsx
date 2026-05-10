@@ -9,6 +9,8 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
 ];
 
+const REPO_URL = "https://github.com/cskwork/free-tier-showcase";
+
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -18,24 +20,27 @@ export function Header() {
   const pathname = usePathname() ?? "/";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-rule bg-[color-mix(in_oklab,var(--paper)_85%,transparent)] backdrop-blur supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--paper)_72%,transparent)]">
+    <header className="sticky top-0 z-40 border-b border-rule bg-[color-mix(in_oklab,var(--cream)_82%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-[color-mix(in_oklab,var(--cream)_70%,transparent)]">
       <div className="mx-auto flex h-16 w-full max-w-[var(--container-wide)] items-center gap-6 px-5 md:px-8">
         <Link
           href="/"
           aria-label="Free Tier Showcase — home"
-          className="group flex items-baseline gap-2"
+          className="group flex items-center gap-2"
         >
-          <span className="font-display text-[1.45rem] leading-none">
-            Free Tier
+          <span
+            aria-hidden
+            className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-orange text-on-orange"
+          >
+            <svg viewBox="0 0 12 12" className="h-3 w-3" fill="currentColor">
+              <path d="M6 1.5 11 10H1L6 1.5Z" />
+            </svg>
           </span>
-          <span className="text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-            showcase
+          <span className="text-[1rem] font-bold tracking-[-0.015em] text-ink">
+            Free Tier Showcase
           </span>
         </Link>
 
-        <span className="hidden h-5 w-px bg-rule md:block" aria-hidden />
-
-        <nav className="ml-auto flex items-center gap-1 md:ml-0 md:mr-auto">
+        <nav className="ml-auto flex items-center gap-1 md:ml-0 md:mr-auto md:pl-6">
           {NAV_LINKS.map((link) => {
             const active = isActive(pathname, link.href);
             return (
@@ -43,10 +48,8 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`relative rounded-md px-3 py-1.5 text-sm transition-colors duration-[var(--duration-fast)] ${
-                  active
-                    ? "text-ink"
-                    : "text-muted hover:text-ink"
+                className={`relative rounded-md px-3 py-1.5 text-[0.875rem] font-medium transition-colors duration-[var(--duration-fast)] ${
+                  active ? "text-ink" : "text-ink-3 hover:text-ink"
                 }`}
               >
                 {link.label}
@@ -62,11 +65,11 @@ export function Header() {
         </nav>
 
         <a
-          href="https://github.com"
+          href={REPO_URL}
           target="_blank"
           rel="noreferrer"
           aria-label="GitHub repository"
-          className="hidden items-center gap-2 rounded-full border border-rule px-3 py-1.5 text-xs text-muted transition-colors hover:border-rule-strong hover:text-ink md:inline-flex"
+          className="hidden items-center gap-2 rounded-full border border-rule bg-surface px-3.5 py-1.5 text-[0.8125rem] font-medium text-ink-2 transition-colors hover:border-rule-strong hover:text-ink md:inline-flex"
         >
           <svg
             viewBox="0 0 24 24"

@@ -28,10 +28,10 @@ export function CategoryPills({ active, onChange }: CategoryPillsProps) {
       {ITEMS.map((item) => {
         const isActive = item.id === active;
         const baseClass =
-          "shrink-0 rounded-full px-3.5 py-1.5 text-xs transition-colors duration-[var(--duration-fast)] focus-visible:outline-none";
+          "shrink-0 rounded-full px-3.5 py-1.5 text-[0.8125rem] font-medium transition-colors duration-[var(--duration-fast)] focus-visible:outline-none";
         const stateClass = isActive
-          ? "bg-ink text-paper"
-          : "border border-rule text-muted hover:border-rule-strong hover:text-ink";
+          ? "bg-ink text-cream"
+          : "border border-rule text-ink-3 hover:border-rule-strong hover:text-ink";
         const className = `${baseClass} ${stateClass}`;
 
         if (onChange) {

@@ -37,27 +37,30 @@ function FilteredList() {
 
   return (
     <>
-      <div className="sticky top-16 z-30 -mx-5 border-y border-rule bg-[color-mix(in_oklab,var(--paper)_88%,transparent)] px-5 py-4 backdrop-blur md:-mx-8 md:px-8">
+      <div className="sticky top-16 z-30 -mx-5 border-y border-rule bg-[color-mix(in_oklab,var(--cream)_88%,transparent)] px-5 py-4 backdrop-blur md:-mx-8 md:px-8">
         <CategoryPills active={active} />
       </div>
 
       <div className="mt-8 flex flex-wrap items-baseline justify-between gap-4 border-b border-rule pb-4">
-        <p className="font-display text-2xl leading-none">
+        <p className="text-2xl font-bold leading-none tracking-[-0.015em] text-ink">
           {activeLabel}
         </p>
-        <p className="font-mono text-xs text-muted">
+        <p className="font-mono text-xs text-ink-3">
           {String(sorted.length).padStart(2, "0")}
-          <span className="text-muted-2"> / {String(SERVICES.length).padStart(2, "0")}</span>{" "}
+          <span className="text-ink-3/70">
+            {" "}
+            / {String(SERVICES.length).padStart(2, "0")}
+          </span>{" "}
           shown
         </p>
       </div>
 
       {sorted.length === 0 ? (
-        <div className="mt-12 rounded-xl border border-dashed border-rule-strong p-10 text-center">
-          <p className="font-display text-2xl leading-tight text-ink-2">
+        <div className="mt-12 rounded-xl border border-dashed border-rule-strong bg-surface p-10 text-center">
+          <p className="text-2xl font-semibold leading-tight text-ink-2">
             No services in this slice yet.
           </p>
-          <p className="mx-auto mt-2 max-w-[40ch] text-sm text-muted">
+          <p className="mx-auto mt-2 max-w-[40ch] text-sm text-ink-3">
             Try a neighbouring category, or open a PR if you know a free-tier
             option that should be listed here.
           </p>
@@ -78,12 +81,12 @@ export function ServicesFilter() {
     <Suspense
       fallback={
         <div className="space-y-4">
-          <div className="h-10 w-full animate-pulse rounded-md bg-paper-2" />
+          <div className="h-10 w-full animate-pulse rounded-md bg-surface-2" />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="h-44 animate-pulse rounded-xl border border-rule bg-paper-2"
+                className="h-44 animate-pulse rounded-xl border border-rule bg-surface-2"
               />
             ))}
           </div>
