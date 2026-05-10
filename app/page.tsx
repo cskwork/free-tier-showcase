@@ -35,16 +35,16 @@ export default function Home() {
       {/* ── Hero ────────────────────────────────────────────────── */}
       <section className={`${SECTION_BASE} pb-14 pt-14 md:pb-20 md:pt-20`}>
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
-          <Reveal as="div" className="max-w-[24ch]">
+          <Reveal as="div">
             <TodayEyebrow label="Today" />
-            <h1 className="mt-6 text-[length:var(--text-display)] font-bold leading-[1.05] tracking-[-0.025em] text-ink">
+            <h1 className="mt-6 max-w-[18ch] text-balance text-[length:var(--text-display)] font-bold leading-[1.05] tracking-[-0.025em] text-ink">
               Ship a real product on{" "}
               <span className="whitespace-nowrap text-orange-deep">
                 $0/mo
               </span>
               .
             </h1>
-            <p className="mt-6 max-w-[44ch] text-base leading-relaxed text-ink-2 md:text-[1.0625rem]">
+            <p className="mt-6 max-w-[44ch] text-pretty text-base leading-relaxed text-ink-2 md:text-[1.0625rem]">
               A curated directory of free-tier services for indie developers.
               Hosting, databases, auth, email, analytics — every entry has the
               actual numbers and the gotcha you&apos;d warn a friend about.
