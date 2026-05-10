@@ -76,14 +76,27 @@ Services that **used** to be free but no longer are (PlanetScale, Heroku, etc.) 
 
 ## Deploying
 
-The build is fully static after `generateStaticParams` runs for every `[slug]` route. Pick one:
+`next.config.ts` is set to `output: 'export'`, so `pnpm build` produces a fully static `out/` directory that any static host can serve. The repo ships with a working **GitHub Pages** pipeline; other hosts work without changes.
 
-- **Vercel** — `vercel deploy`. Auto-detects Next.js. Free Hobby tier.
-- **Cloudflare Pages** — connect the repo, build cmd `pnpm build`, output `.next/`. Use `@cloudflare/next-on-pages`.
-- **Netlify** — same as Vercel, free starter tier.
-- **GitHub Pages** — would need to switch to `output: 'export'` in `next.config.ts` first.
+### GitHub Pages (built-in)
 
-Set `NEXT_PUBLIC_APP_URL` in the deploy env if you want canonical URLs in metadata; otherwise the build works without any env vars.
+`.github/workflows/deploy.yml` deploys on every push to `main`. To enable on a fresh fork:
+
+1. Push the repo to GitHub (public repo required for free Pages).
+2. Repo → **Settings → Pages → Source: GitHub Actions**.
+3. The workflow runs automatically; the deployment URL appears on the workflow's deploy job and at `Settings → Pages`.
+
+The build derives `basePath` from `GITHUB_REPOSITORY` automatically:
+- Project page (`username.github.io/repo-name`) → `basePath = "/repo-name"`
+- User/org page (`username.github.io`) → `basePath = ""`
+
+Local `pnpm dev` and `pnpm build` use no basePath, so dev links keep working.
+
+### Other hosts
+
+- **Vercel** — `vercel deploy`. Vercel ignores `output: 'export'` and serves the same `out/`.
+- **Cloudflare Pages** — connect the repo, build `pnpm build`, output dir `out`.
+- **Netlify** — same as Cloudflare Pages.
 
 ## Cleanup history
 

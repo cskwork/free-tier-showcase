@@ -1,10 +1,10 @@
-name: CI
+name: CI (PR checks)
 
 on:
   pull_request:
-  push:
-    branches: [main]
 
+# deploy.yml handles main pushes — this workflow only runs on PRs to avoid
+# duplicate builds when something lands on main.
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -28,5 +28,3 @@ jobs:
 
       - name: Build (smoke test)
         run: pnpm build
-        env:
-          NEXT_PUBLIC_APP_URL: http://localhost:3000
