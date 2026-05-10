@@ -30,25 +30,40 @@ function FilteredList() {
     });
   }, [active]);
 
+  const activeLabel =
+    active === "all"
+      ? "Everything"
+      : (CATEGORIES.find((c) => c.id === active)?.label ?? "Everything");
+
   return (
     <>
-      <div className="mb-6 flex items-center justify-between text-sm text-foreground/60">
-        <span>
-          {sorted.length} of {SERVICES.length} services
-          {active !== "all"
-            ? ` · ${CATEGORIES.find((c) => c.id === active)?.label}`
-            : ""}
-        </span>
-      </div>
-
-      <div className="mb-8">
+      <div className="sticky top-16 z-30 -mx-5 border-y border-rule bg-[color-mix(in_oklab,var(--paper)_88%,transparent)] px-5 py-4 backdrop-blur md:-mx-8 md:px-8">
         <CategoryPills active={active} />
       </div>
 
+      <div className="mt-8 flex flex-wrap items-baseline justify-between gap-4 border-b border-rule pb-4">
+        <p className="font-display text-2xl leading-none">
+          {activeLabel}
+        </p>
+        <p className="font-mono text-xs text-muted">
+          {String(sorted.length).padStart(2, "0")}
+          <span className="text-muted-2"> / {String(SERVICES.length).padStart(2, "0")}</span>{" "}
+          shown
+        </p>
+      </div>
+
       {sorted.length === 0 ? (
-        <p className="text-foreground/60">No services match this filter.</p>
+        <div className="mt-12 rounded-xl border border-dashed border-rule-strong p-10 text-center">
+          <p className="font-display text-2xl leading-tight text-ink-2">
+            No services in this slice yet.
+          </p>
+          <p className="mx-auto mt-2 max-w-[40ch] text-sm text-muted">
+            Try a neighbouring category, or open a PR if you know a free-tier
+            option that should be listed here.
+          </p>
+        </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {sorted.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}
@@ -62,7 +77,17 @@ export function ServicesFilter() {
   return (
     <Suspense
       fallback={
-        <div className="text-sm text-foreground/50">Loading filter…</div>
+        <div className="space-y-4">
+          <div className="h-10 w-full animate-pulse rounded-md bg-paper-2" />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="h-44 animate-pulse rounded-xl border border-rule bg-paper-2"
+              />
+            ))}
+          </div>
+        </div>
       }
     >
       <FilteredList />

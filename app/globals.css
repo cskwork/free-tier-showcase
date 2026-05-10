@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — editorial directory tone.
+ * Light-mode committed. Tints are warm to avoid the cold "AI grey" default;
+ * the single accent is a desaturated moss/emerald so it disappears into
+ * neutrals until it's needed (links, recommended badge, focus ring).
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-}
+  /* Surfaces */
+  --paper: #fbfaf7;
+  --paper-2: #f4f2ec;
+  --ink: #1a1a18;
+  --ink-2: #2a2926;
+  --muted: #6b6962;
+  --muted-2: #8a8780;
+  --rule: #e5e2da;
+  --rule-strong: #c9c5b9;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Accent (desaturated moss). Saturation < 80% per anti-AI palette rules. */
+  --accent: #3f6b4f;
+  --accent-ink: #1f3a2a;
+  --accent-soft: #e6ece5;
+
+  /* Backgrounds — same family, just shifted. No random dark sections. */
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  /* Tinted shadows — carry the paper hue, not pure black. */
+  --shadow-sm: 0 1px 2px rgba(31, 28, 18, 0.04);
+  --shadow-md: 0 8px 24px -12px rgba(31, 28, 18, 0.08);
+  --shadow-lg: 0 24px 48px -28px rgba(31, 28, 18, 0.18);
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 160ms;
+  --duration: 240ms;
+  --duration-slow: 420ms;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+
+  /* Typography stack — set on `html` via next/font CSS variables. */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Editorial type scale */
+  --text-display: clamp(2.75rem, 5.5vw + 1rem, 5.25rem);
+  --text-h1: clamp(2rem, 3.2vw + 1rem, 3rem);
+  --text-h2: clamp(1.5rem, 1.4vw + 1rem, 2rem);
+
+  /* Container widths */
+  --container-wide: 76rem;
+  --container-prose: 44rem;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  /* Tabular numerals everywhere — this is a directory of limits/quotas. */
+  font-variant-numeric: tabular-nums;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display utility: serif, tight tracking, balanced wrap. */
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01", "kern";
+  letter-spacing: -0.02em;
+}
+
+/* Honest paper grain — fixed, pointer-events: none, no scroll repaint cost. */
+.paper-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0.045 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+}
+
+/* Scroll-reveal — tasteful, CSS-only.
+   Children with [data-reveal] start translated/dimmed and lift in via JS island. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-quart),
+    transform var(--duration-slow) var(--ease-out-quart);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Selection — accent moss, not the default browser blue. */
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+/* Focus ring — keyboard-only, accent-tinted. */
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Link underline rhythm */
+.link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in oklab, var(--ink) 30%, transparent);
+  transition: text-decoration-color var(--duration-fast) var(--ease-out-quart);
+}
+.link-underline:hover {
+  text-decoration-color: var(--ink);
 }

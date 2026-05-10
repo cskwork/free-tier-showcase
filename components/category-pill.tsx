@@ -7,7 +7,7 @@ interface CategoryPillProps {
 export function CategoryPill({ id }: CategoryPillProps) {
   const category = getCategory(id);
   return (
-    <span className="inline-flex items-center rounded-md border border-foreground/15 px-2 py-0.5 text-xs text-foreground/70">
+    <span className="inline-flex items-center font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">
       {category.label}
     </span>
   );

@@ -20,22 +20,27 @@ const ITEMS: PillItem[] = [
 
 export function CategoryPills({ active, onChange }: CategoryPillsProps) {
   return (
-    <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+    <div
+      role="tablist"
+      aria-label="Filter by category"
+      className="-mx-5 flex gap-1.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:-mx-8 md:px-8"
+    >
       {ITEMS.map((item) => {
         const isActive = item.id === active;
         const baseClass =
-          "shrink-0 rounded-md px-3 py-1 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40";
-        const activeClass = isActive
-          ? "bg-foreground text-background"
-          : "border border-foreground/15 text-foreground/70 hover:bg-foreground/5";
-        const className = `${baseClass} ${activeClass}`;
+          "shrink-0 rounded-full px-3.5 py-1.5 text-xs transition-colors duration-[var(--duration-fast)] focus-visible:outline-none";
+        const stateClass = isActive
+          ? "bg-ink text-paper"
+          : "border border-rule text-muted hover:border-rule-strong hover:text-ink";
+        const className = `${baseClass} ${stateClass}`;
 
         if (onChange) {
           return (
             <button
               key={item.id}
               type="button"
-              aria-pressed={isActive}
+              role="tab"
+              aria-selected={isActive}
               onClick={() => onChange(item.id)}
               className={className}
             >
@@ -50,6 +55,8 @@ export function CategoryPills({ active, onChange }: CategoryPillsProps) {
           <Link
             key={item.id}
             href={href}
+            role="tab"
+            aria-selected={isActive}
             aria-current={isActive ? "page" : undefined}
             className={className}
           >

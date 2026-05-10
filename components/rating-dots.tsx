@@ -5,19 +5,17 @@ interface RatingDotsProps {
 export function RatingDots({ rating }: RatingDotsProps) {
   return (
     <div
-      className="inline-flex items-center gap-1"
+      className="inline-flex items-center gap-[3px]"
       role="img"
-      aria-label={`Rated ${rating} out of 5`}
+      aria-label={`Generosity rated ${rating} out of 5`}
     >
       {[1, 2, 3, 4, 5].map((i) => (
         <span
           key={i}
           aria-hidden="true"
-          className={
-            i <= rating
-              ? "h-1.5 w-1.5 rounded-full bg-foreground"
-              : "h-1.5 w-1.5 rounded-full bg-foreground/20"
-          }
+          className={`h-1 w-3 rounded-[1px] transition-colors ${
+            i <= rating ? "bg-ink" : "bg-rule-strong/60"
+          }`}
         />
       ))}
     </div>

@@ -31,42 +31,90 @@ export default async function StackDetailPage({ params }: PageProps) {
   const services = getServicesInStack(stack);
 
   return (
-    <article className="mx-auto max-w-3xl px-6 py-12">
+    <article className="mx-auto w-full max-w-[var(--container-wide)] px-5 pb-24 pt-12 md:px-8 md:pt-16">
       <Link
         href="/stacks"
-        className="text-sm text-foreground/60 underline-offset-4 hover:underline"
+        className="link-underline text-sm text-muted hover:text-ink"
       >
-        ← All stacks
+        <span aria-hidden>←</span> All stacks
       </Link>
 
-      <header className="mt-6">
-        <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{stack.name}</h1>
-        <p className="mt-3 text-lg text-foreground/70">{stack.tagline}</p>
+      <header className="mt-10 grid gap-8 border-b border-rule pb-12 md:grid-cols-[1.6fr_1fr] md:gap-16">
+        <div>
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
+            Stack
+          </p>
+          <h1 className="mt-4 font-display text-[length:var(--text-h1)] leading-[1.02]">
+            {stack.name}
+          </h1>
+          <p className="mt-5 max-w-[55ch] text-lg leading-relaxed text-ink-2">
+            {stack.tagline}
+          </p>
+        </div>
+        <aside className="md:border-l md:border-rule md:pl-10">
+          <dl className="space-y-5">
+            <div>
+              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+                Cost
+              </dt>
+              <dd className="mt-2 font-display text-2xl leading-none text-ink">
+                {stack.costEstimate}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+                First limit
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-ink-2">
+                {stack.ceiling}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+                Services
+              </dt>
+              <dd className="mt-2 font-mono text-sm text-ink">
+                {String(stack.services.length).padStart(2, "0")}
+              </dd>
+            </div>
+          </dl>
+        </aside>
       </header>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-foreground/15 p-5">
-          <div className="text-xs uppercase tracking-wide text-foreground/50">Cost</div>
-          <p className="mt-2 font-medium">{stack.costEstimate}</p>
+      <section className="mt-14 grid gap-12 md:grid-cols-[14ch_1fr]">
+        <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
+          Why this stack
         </div>
-        <div className="rounded-xl border border-foreground/15 p-5">
-          <div className="text-xs uppercase tracking-wide text-foreground/50">First limit</div>
-          <p className="mt-2 text-sm text-foreground/80">{stack.ceiling}</p>
+        <div className="max-w-[65ch] whitespace-pre-line text-base leading-relaxed text-ink-2">
+          {stack.description}
         </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold tracking-tight">Why this stack</h2>
-        <div className="mt-3 whitespace-pre-line text-foreground/80">{stack.description}</div>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold tracking-tight">Services in this stack</h2>
-        <p className="mt-1 text-sm text-foreground/60">In order of setup.</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {services.map((s) => (
-            <ServiceCard key={s.slug} service={s} />
-          ))}
+      <section className="mt-20 grid gap-12 md:grid-cols-[14ch_1fr]">
+        <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
+          Build order
+        </div>
+        <div>
+          <h2 className="font-display text-2xl leading-tight">
+            Services in this stack
+          </h2>
+          <p className="mt-2 max-w-[55ch] text-sm text-muted">
+            Numbered in the order they should be set up — earlier items are
+            usually dependencies for later ones.
+          </p>
+          <ol className="mt-6 grid gap-5 sm:grid-cols-2">
+            {services.map((s, i) => (
+              <li key={s.slug} className="relative">
+                <span
+                  aria-hidden
+                  className="absolute -left-1 -top-2 z-10 font-mono text-[0.7rem] tracking-[0.18em] text-muted-2"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <ServiceCard service={s} />
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </article>
