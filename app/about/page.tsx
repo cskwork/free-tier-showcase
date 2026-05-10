@@ -9,54 +9,54 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <article className="mx-auto w-full max-w-[var(--container-wide)] px-5 pb-24 pt-16 md:px-8 md:pt-24">
+    <article className="mx-auto w-full max-w-[var(--container-wide)] px-5 pb-24 pt-14 md:px-8 md:pt-20">
       <header className="grid gap-10 border-b border-rule pb-14 md:grid-cols-[1.6fr_1fr] md:gap-16">
         <div>
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
+          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
             About
           </p>
-          <h1 className="mt-4 font-display text-[length:var(--text-h1)] leading-[1.02]">
+          <h1 className="mt-4 text-[length:var(--text-h1)] font-bold leading-[1.05] tracking-[-0.02em] text-ink">
             A directory of services with{" "}
-            <span className="italic">honest</span> free tiers.
+            <span className="text-orange-deep">honest</span> free tiers.
           </h1>
-          <p className="mt-5 max-w-[55ch] text-lg leading-relaxed text-ink-2">
+          <p className="mt-5 max-w-[55ch] text-base leading-relaxed text-ink-2 md:text-lg">
             Generous enough to ship a real product on, not just demo it.{" "}
             <span className="font-mono text-ink">{SERVICES.length}</span>{" "}
             services across{" "}
             <span className="font-mono text-ink">{CATEGORIES.length}</span>{" "}
             categories, plus{" "}
-            <span className="font-mono text-ink">{STACKS.length}</span>{" "}
-            curated stacks for common use cases.
+            <span className="font-mono text-ink">{STACKS.length}</span> curated
+            stacks for common use cases.
           </p>
         </div>
         <aside className="md:border-l md:border-rule md:pl-10">
           <dl className="grid grid-cols-2 gap-y-5">
             <div>
-              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+              <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
                 Services
               </dt>
-              <dd className="mt-2 font-display text-3xl leading-none">
+              <dd className="mt-2 text-3xl font-bold leading-none text-ink">
                 {SERVICES.length}
               </dd>
             </div>
             <div>
-              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+              <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
                 Categories
               </dt>
-              <dd className="mt-2 font-display text-3xl leading-none">
+              <dd className="mt-2 text-3xl font-bold leading-none text-ink">
                 {CATEGORIES.length}
               </dd>
             </div>
             <div>
-              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+              <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
                 Stacks
               </dt>
-              <dd className="mt-2 font-display text-3xl leading-none">
+              <dd className="mt-2 text-3xl font-bold leading-none text-ink">
                 {STACKS.length}
               </dd>
             </div>
             <div>
-              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+              <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
                 Verified
               </dt>
               <dd className="mt-2 font-mono text-base text-ink">2026-05</dd>
@@ -65,12 +65,12 @@ export default function AboutPage() {
         </aside>
       </header>
 
-      <section className="mt-14 grid gap-12 md:grid-cols-[14ch_1fr]">
-        <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
-          What's in
+      <section className="mt-12 grid gap-10 md:grid-cols-[14ch_1fr]">
+        <div className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
+          What&apos;s in
         </div>
         <div>
-          <h2 className="font-display text-2xl leading-tight">
+          <h2 className="text-2xl font-bold leading-tight tracking-[-0.015em] text-ink">
             Inclusion criteria
           </h2>
           <ul className="mt-5 space-y-4">
@@ -91,30 +91,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mt-20 grid gap-12 md:grid-cols-[14ch_1fr]">
-        <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
-          What's out
+      <section className="mt-16 grid gap-10 md:grid-cols-[14ch_1fr]">
+        <div className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
+          What&apos;s out
         </div>
         <div>
-          <h2 className="font-display text-2xl leading-tight">
-            What we don't do
+          <h2 className="text-2xl font-bold leading-tight tracking-[-0.015em] text-ink">
+            What we don&apos;t do
           </h2>
           <dl className="mt-5 space-y-5">
             <div>
-              <dt className="font-medium text-ink">No affiliate links.</dt>
+              <dt className="font-semibold text-ink">No affiliate links.</dt>
               <dd className="mt-1 text-base leading-relaxed text-ink-2">
                 Every outbound link is the bare canonical URL.
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-ink">No tier guesses.</dt>
+              <dt className="font-semibold text-ink">No tier guesses.</dt>
               <dd className="mt-1 text-base leading-relaxed text-ink-2">
-                If we're unsure of a number we use a hedge phrase rather than
-                a fake digit.
+                If we&apos;re unsure of a number we use a hedge phrase rather
+                than a fake digit.
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-ink">No personal data.</dt>
+              <dt className="font-semibold text-ink">No personal data.</dt>
               <dd className="mt-1 text-base leading-relaxed text-ink-2">
                 The site has no auth and no analytics that track individuals.
               </dd>
@@ -123,25 +123,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mt-20 grid gap-12 md:grid-cols-[14ch_1fr]">
-        <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-2">
+      <section className="mt-16 grid gap-10 md:grid-cols-[14ch_1fr]">
+        <div className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-3">
           Contributing
         </div>
         <div>
-          <h2 className="font-display text-2xl leading-tight">
+          <h2 className="text-2xl font-bold leading-tight tracking-[-0.015em] text-ink">
             Open a PR.
           </h2>
           <p className="mt-3 max-w-[55ch] text-base leading-relaxed text-ink-2">
             The catalog lives in{" "}
-            <code className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink">
+            <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink">
               data/services.ts
             </code>{" "}
             and{" "}
-            <code className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink">
+            <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink">
               data/stacks.ts
             </code>
             . Both files are typed against{" "}
-            <code className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink">
+            <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink">
               data/types.ts
             </code>{" "}
             so TypeScript will tell you if a field is missing.
@@ -149,7 +149,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <p className="mt-20 border-t border-rule pt-6 text-xs text-muted">
+      <p className="mt-16 border-t border-rule pt-6 text-xs text-ink-3">
         Numbers verified <span className="font-mono text-ink-2">2026-05</span>.
         Pricing changes — confirm via the linked pricing page before relying on
         a number for a launch decision.
