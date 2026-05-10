@@ -1119,6 +1119,41 @@ export const SERVICES: Service[] = [
     rating: 3,
     verifiedAt: "2026-05",
   },
+  {
+    slug: "toss-payments",
+    name: "Toss Payments",
+    tagline: "Korea's developer-friendly PG — modern API, no setup or monthly fee.",
+    category: "payments",
+    tier: "No monthly fee; ~2.7–3.3% per card transaction (KRW)",
+    notes: [
+      "Korea-only by default — settles in KRW, requires a Korean business registration (사업자등록).",
+      "Best DX among domestic PGs; supports billing/recurring out of the box.",
+      "Per-merchant rate is negotiated — verify your bracket on the pricing page.",
+    ],
+    url: "https://www.tosspayments.com",
+    pricingUrl: "https://www.tosspayments.com/pricing",
+    alternativeTo: ["stripe", "portone"],
+    rating: 5,
+    recommended: true,
+    verifiedAt: "2026-05",
+  },
+  {
+    slug: "portone",
+    name: "PortOne (포트원)",
+    tagline: "Korean PG aggregator — one SDK across Toss, Kakao, Naver, NICE, KG Inicis.",
+    category: "payments",
+    tier: "Free SDK / dashboard; you only pay the underlying PG's transaction fee",
+    notes: [
+      "Formerly 아임포트 (IAMPORT); v2 SDK is the current target.",
+      "Use when you need multiple Korean PGs without writing each integration.",
+      "Some advanced features (analytics, custom routing) moved to paid plans — verify first.",
+    ],
+    url: "https://portone.io",
+    pricingUrl: "https://portone.io/korea/ko/pricing",
+    alternativeTo: ["toss-payments", "stripe"],
+    rating: 4,
+    verifiedAt: "2026-05",
+  },
 
   // ──────────────────────────────────────────────────────────────────
   // AI
